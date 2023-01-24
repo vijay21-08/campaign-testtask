@@ -1,0 +1,51 @@
+
+<mat-accordion class="example-headers-align" multi>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+    Location Detail
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+        <form class="example-form" [formGroup]="secondFormGroup">
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Favorite food</mat-label>
+            <input matInput placeholder="Ex. Pizza" value="Sushi" formControlName="campaignObj">
+          </mat-form-field>
+          
+          <mat-form-field appearance="outline">
+              <mat-label>Favorite food</mat-label>
+              <mat-select formControlName="campaignCat">
+                <mat-option *ngFor="let food of foods" [value]="food.value" >
+                  {{food.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            
+            <mat-form-field appearance="outline">
+              <mat-label>Favorite food</mat-label>
+              <mat-select formControlName="orderType">
+                <mat-option *ngFor="let food of foods" [value]="food.value">
+                  {{food.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          
+            <mat-form-field class="example-full-width">
+            <mat-label>Leave a comment</mat-label>
+            <textarea matInput placeholder="Ex. It makes me feel..." formControlName="additionalComments"></textarea>
+          </mat-form-field>
+      
+          <div>
+              <button mat-button (click)="back()">Back</button>
+              <button mat-button (click)="sendForm()">Next</button>
+            </div>
+        </form>
+     
+       
+  </mat-expansion-panel>
+</mat-accordion>
+
+
+
+
+

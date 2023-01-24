@@ -15,16 +15,22 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatSelectModule} from '@angular/material/select';
 import {MatStepperModule} from '@angular/material/stepper';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-
-
+import { MatInputModule } from '@angular/material/input';
+import {MatRadioModule} from '@angular/material/radio';
+import { Form1Component } from './form1/form1.component';
+import { Form2Component } from './form2/form2.component';
+import {MatExpansionModule} from '@angular/material/expansion';
+import { Form3Component } from './form3/form3.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     CampaignListComponent,
-    CampaignFormComponent
+    CampaignFormComponent,
+    Form1Component,
+    Form2Component,
+    Form3Component
   ],
   imports: [
     BrowserModule,
@@ -39,7 +45,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatSelectModule,
     MatStepperModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatInputModule,
+    MatRadioModule,
+    MatExpansionModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -27,3 +27,85 @@ table {
   //   border-radius: 20px;
   // }
 
+
+  .text-center {
+    text-align: center;
+  }
+  .text-right {
+    text-align: right;
+  }
+  ::ng-deep {
+    .card-ui {
+      box-shadow: none;
+      .mat-mdc-card-content {
+        padding: 0;
+      }
+      .table-ui {
+        box-shadow: none;
+        table {
+          thead {
+            tr {
+              th {
+                font-weight: 600;
+                &.width {
+                  width: 120px;
+                }
+              }
+            }
+          }
+          tbody {
+            tr {
+              td {
+                padding: 10px 16px;
+                &.status-ui {
+                  span {
+                    padding: 6px 15px;
+                    background-color: #bbeacf;
+                    color: #069a47;
+                    font-weight: 500;
+                    border-radius: 30px;
+                    width: 110px;
+                    line-height: 18px;
+                    text-align: center;
+                  }
+                }
+                .mat-ui-change {
+                  .mat-mdc-text-field-wrapper {
+                    background-color: #c5c4c5;
+                    border-radius: 5px;
+                    .mdc-line-ripple {
+                      display: none;
+                    }
+                    .mat-mdc-form-field-flex {
+                      .mat-mdc-form-field-infix {
+                        padding: 0;
+                        min-height: 46px;
+                        .mdc-floating-label {
+                          top: 23px;
+                        }
+                        .mat-mdc-select {
+                          position: absolute;
+                          top: 50%;
+                          transform: translateY(-50%);
+                          .mat-mdc-select-arrow-wrapper {
+                            transform: none;
+                          }
+                          &:not(.mat-mdc-select-empty) {
+                            top: calc(50% + 5px);
+                          }
+                        }
+                      }
+                    }
+                  }
+                  .mat-mdc-form-field-subscript-wrapper {
+                    display: none;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  

@@ -1,0 +1,42 @@
+<mat-accordion class="example-headers-align" multi>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Campaign Detail
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+        <form class="example-form" [formGroup]="firstFormGroup">
+          <mat-form-field   appearance="outline" class="example-full-width">
+            <mat-label>Campaign Objective</mat-label>
+            <input matInput placeholder="Ex. Pizza" value="Sushi" formControlName="campaignObj">
+          </mat-form-field>
+          
+          <mat-form-field appearance="outline">
+              <mat-label>Campaign Category(Opitional)</mat-label>
+              <mat-select formControlName="campaignCat">
+                <mat-option *ngFor="let food of foods" [value]="food.value" >
+                  {{food.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            
+            <mat-form-field appearance="outline">
+              <mat-label>Offer Type</mat-label>
+              <mat-select formControlName="orderType">
+                <mat-option *ngFor="let food of foods" [value]="food.value">
+                  {{food.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          
+            <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Additional Comments</mat-label>
+            <textarea matInput placeholder="Ex. It makes me feel..." formControlName="additionalComments"></textarea>
+          </mat-form-field>
+      
+          <div>
+              <button mat-button (click)="sendForm()">Next</button>
+            </div>
+        </form>
+  </mat-expansion-panel>
+</mat-accordion>

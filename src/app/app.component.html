@@ -1,7 +1,11 @@
-<h2>Manage Campaigns</h2>
-<div class="create-campaign">  
-    <button mat-raised-button color="primary">Create Campaign</button>
-</div>
+<h2 class="title-ui">{{isShowForm ? 'Campiagn' : 'Manage Campaign'}}</h2>
+<div class="card-container">
+    <div class="create-campaign" *ngIf="!isShowForm">  
+        <button mat-raised-button color="primary" (click)="handleClick()">Create Campaign</button>
+    </div>
 
-<app-campaign-list></app-campaign-list>
-<!-- <app-campaign-form></app-campaign-form> -->
+    <app-campaign-list *ngIf="!isShowForm; else elseBlock"></app-campaign-list>
+    <ng-template #elseBlock>
+        <app-campaign-form ></app-campaign-form>
+    </ng-template>
+</div>

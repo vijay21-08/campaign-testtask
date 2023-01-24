@@ -1,34 +1,20 @@
-<mat-stepper headerPosition="bottom" #stepper>
-    <mat-step [stepControl]="firstFormGroup">
-      <form [formGroup]="firstFormGroup">
-        <ng-template matStepLabel>Fill out your name</ng-template>
-        <mat-form-field>
-          <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
-        </mat-form-field>
-        <div>
-          <button mat-button matStepperNext>Next</button>
-        </div>
-      </form>
+<mat-stepper class="demo-stepper" #stepper>
+      <!-- <mat-step [stepControl]="firstFormGroup"> -->
+      <mat-step label="Campaign Detail">
+        <app-form1 (firstFormEmitter)="firstFormSubmission($event)"></app-form1>
     </mat-step>
-    <mat-step [stepControl]="secondFormGroup" optional>
-      <form [formGroup]="secondFormGroup">
-        <ng-template matStepLabel>Fill out your address</ng-template>
-        <mat-form-field>
-          <input matInput placeholder="Address" formControlName="secondCtrl" required>
-        </mat-form-field>
+    <mat-step label="Loctaion Detail">
+      <app-form2 (backEmitter)="goBack()"(secondFormEmitter)="secondFormSubmission($event)"></app-form2>
+    </mat-step>
+    <mat-step label="Audience">
+      <app-form3 (backEmitter)="goBack()"(thirdFormEmitter)="thirdFormSubmission($event)"></app-form3>
+    </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Campaign Schedule</ng-template>
+        <p>You are now done.</p>
         <div>
           <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
+          <button mat-button (click)="stepper.reset()">Reset</button>
         </div>
-      </form>
-    </mat-step>
-    <mat-step>
-      <ng-template matStepLabel>Done</ng-template>
-      You are now done.
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button (click)="stepper.reset()">Reset</button>
-      </div>
-    </mat-step>
-  </mat-stepper>
-  
+      </mat-step>
+    </mat-stepper>
