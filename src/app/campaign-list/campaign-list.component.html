@@ -1,0 +1,65 @@
+
+
+<mat-card>
+    <mat-card-content>
+        <div>
+             <div class="mat-elevation-z8">
+                <table mat-table [dataSource]="dataSource" matSort>
+              
+                  <!-- ID Column -->
+                  <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef > Program ID </th>
+                    <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+                  </ng-container>
+              
+                  <!-- Name Column -->
+                  <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef > Campaign Name </th>
+                    <td mat-cell *matCellDef="let row"> {{row.name}}% </td>
+                  </ng-container>
+              
+                  <!-- status Column -->
+                  <ng-container matColumnDef="progress" class="progess">
+                    <th mat-header-cell *matHeaderCellDef> Status </th>
+                    <td mat-cell [ngClass]="{'green': row.progress=== 'Completed', 'gray': row.progress !== 'Completed' }" *matCellDef="let row"> {{row.progress}} </td>
+                  </ng-container>
+              
+                  <!-- CTR Column -->
+                  <ng-container matColumnDef="fruit">
+                    <th mat-header-cell *matHeaderCellDef > CTR </th>
+                    <td mat-cell *matCellDef="let row"> {{row.ctr}}% </td>
+                  </ng-container>
+            
+                  <!-- Start date Column -->
+                  <ng-container matColumnDef="start_date">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Start Date </th>
+                    <td mat-cell *matCellDef="let row"> {{row.start_date}} </td>
+                  </ng-container>
+            
+                   <!-- Actions Column -->
+                   <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef > Actions </th>
+                    <td mat-cell *matCellDef="let row"> 
+                        <mat-form-field appearance="fill">
+                            <mat-label>Actions</mat-label>
+                            <mat-select>
+                              <mat-option *ngFor="let action of actions" [value]="action.value">
+                                {{action.viewValue}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                    </td>
+                  </ng-container>
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              
+                </table>
+              
+                <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+              </div>
+              
+        </div>
+    </mat-card-content>
+  </mat-card>
+
+  
