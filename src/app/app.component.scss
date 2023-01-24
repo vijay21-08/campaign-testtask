@@ -1,8 +1,4 @@
 .card-container {
-    background-color: #fff;
-    border: 1px solid #eee;
-    border-radius: 5px;
-    padding: 20px;
     .create-campaign {
       button {
         background-color: #1162ff;
@@ -13,5 +9,16 @@
     color: #555;
     font-weight: 600;
     font-size: 22px;
+    margin: 0;
+  }
+  .main-container {
+    padding: 20px;
+  }
+  .card-container:has(.create-campaign) {
+    background-color: #fff;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    padding: 20px;
+    margin-top: 20px;
   }
   

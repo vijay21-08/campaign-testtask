@@ -21,6 +21,9 @@ import { Form1Component } from './form1/form1.component';
 import { Form2Component } from './form2/form2.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { Form3Component } from './form3/form3.component';
+import { AgmCoreModule } from '@agm/core';
+import {MatIconModule} from '@angular/material/icon';
+
 
 
 @NgModule({
@@ -48,7 +51,11 @@ import { Form3Component } from './form3/form3.component';
     ReactiveFormsModule,
     MatInputModule,
     MatRadioModule,
-    MatExpansionModule
+    MatExpansionModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyA_S6OnrLoBlHFUm-TKNdJugb-sfS1dJl0'
+    }),
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

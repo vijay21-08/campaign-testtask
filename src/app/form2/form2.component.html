@@ -7,37 +7,72 @@
       </mat-panel-title>
     </mat-expansion-panel-header>
         <form class="example-form" [formGroup]="secondFormGroup">
-          <mat-form-field appearance="outline" class="example-full-width">
-            <mat-label>Favorite food</mat-label>
-            <input matInput placeholder="Ex. Pizza" value="Sushi" formControlName="campaignObj">
-          </mat-form-field>
           
-          <mat-form-field appearance="outline">
-              <mat-label>Favorite food</mat-label>
-              <mat-select formControlName="campaignCat">
-                <mat-option *ngFor="let food of foods" [value]="food.value" >
-                  {{food.viewValue}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-            
-            <mat-form-field appearance="outline">
-              <mat-label>Favorite food</mat-label>
-              <mat-select formControlName="orderType">
-                <mat-option *ngFor="let food of foods" [value]="food.value">
-                  {{food.viewValue}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          
-            <mat-form-field class="example-full-width">
-            <mat-label>Leave a comment</mat-label>
-            <textarea matInput placeholder="Ex. It makes me feel..." formControlName="additionalComments"></textarea>
-          </mat-form-field>
-      
+          <div class="grid-ui">
+           <mat-form-field appearance="outline" class="full-width">
+             <mat-label>Search Location</mat-label>
+             <input matInput value="Sushi" formControlName="campaignObj">
+           </mat-form-field>
+            <agm-map [latitude]="lat" [longitude]="lng">
+              <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+            </agm-map>
+         </div>
           <div>
-              <button mat-button (click)="back()">Back</button>
-              <button mat-button (click)="sendForm()">Next</button>
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
+              <!-- Position Column -->
+              <ng-container matColumnDef="position">
+                <th mat-header-cell *matHeaderCellDef>No.</th>
+                <td mat-cell *matCellDef="let element">{{element.position}}</td>
+              </ng-container>
+            
+              <!-- Name Column -->
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef>Name</th>
+                <td mat-cell *matCellDef="let element"><div class="left-td">{{element.name}}</div></td>
+              </ng-container>
+            
+              <!-- Edit Column -->
+              <ng-container matColumnDef="weight">
+                <th mat-header-cell *matHeaderCellDef>Weight</th>
+                <td mat-cell *matCellDef="let element">	 
+                  <div class="right-td">
+                    <button mat-raised-button (click)="addData()" class="demo-button">
+                    <mat-icon>edit</mat-icon>
+                    </button>
+                  </div>
+              </td>
+              </ng-container>
+            
+              <!-- Remove Column -->
+              <ng-container matColumnDef="symbol">
+                <th mat-header-cell *matHeaderCellDef>Symbol</th>
+                <td mat-cell *matCellDef="let element">
+                  <button
+                  mat-raised-button
+                  [disabled]="!dataToDisplay.length"
+                  (click)="removeData()"
+                  class="demo-button">
+                  <mat-icon>delete</mat-icon>
+              </button>
+                </td>
+              </ng-container>
+            
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <mat-form-field appearance="outline" class="full-width mat-ui-change">
+              <mat-label>Radius</mat-label>
+              <input matInput value="Sushi" formControlName="campaignObj">
+            </mat-form-field>
+          </div>
+            
+      
+          <div class="flex-ui example-full-width">
+              <button mat-button (click)="back()" class="dull-btn">Back</button>
+              <div class="">
+                <button mat-button (click)="back()" class="secondary-btn">Apply</button>
+                <button mat-button (click)="sendForm()" class="primary-btn">Next</button>
+              </div>
             </div>
         </form>
      
