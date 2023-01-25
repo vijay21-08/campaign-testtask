@@ -10,3 +10,25 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-
   :root{
     --mdc-theme-primary: #1162ff;
   }
+  .primary-btn {
+    padding: 10px 30px;
+    background-color: #1162ff;
+    color: #fff;
+    height: auto;
+    width: fit-content;
+  }
+  .secondary-btn {
+    padding: 10px 30px;
+    background-color: #fff;
+    color: #1162ff;
+    border: 1px solid #1162ff;
+    height: auto;
+    width: fit-content;
+  }
+  .dull-btn {
+    padding: 10px 30px;
+    background-color: #ccc;
+    color: #333;
+    height: auto;
+    width: fit-content;
+  }
