@@ -28,6 +28,8 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { HttpClientModule } from '@angular/common/http';
 
+import { ToastrModule } from 'ngx-toastr';
+
 
 
 @NgModule({
@@ -66,7 +68,8 @@ import { HttpClientModule } from '@angular/common/http';
     }),
     MatIconModule,
     MatMenuModule,
-    MatCheckboxModule 
+    MatCheckboxModule,
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

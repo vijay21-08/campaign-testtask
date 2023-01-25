@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { enviroment } from 'src/environment/environment';
 
 
 @Injectable({
@@ -7,11 +8,17 @@ import { HttpClient } from '@angular/common/http';
 })
 export class CommonService {
 
+  private url = enviroment.apiUrl;
+
   constructor(private http: HttpClient) { }
 
 
 
   getData() {
-    return this.http.get('https://63d113d43f08e4a8ff8fee16.mockapi.io/api/v1/campaign')
+    return this.http.get(`${this.url}/campaign`)
+  }
+
+  deleteCampaign(id: string) {
+    return this.http.delete(`${this.url}/campaign/${id}`);
   }
 }
