@@ -29,6 +29,6 @@ export class CommonService {
 
   postData(body: any){
     const headers = { 'content-type': 'application/json'}  
-    return this.http.post('https://63d113d43f08e4a8ff8fee16.mockapi.io/api/v1/campaign', body,{'headers':headers})
+    return this.http.post(`${this.url}/campaign`, body, {'headers':headers});
   }
 }

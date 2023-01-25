@@ -1,15 +1,11 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import {DataSource} from '@angular/cdk/collections';
 import {Observable, ReplaySubject} from 'rxjs';
 import {OnInit, ViewChild, ElementRef, NgZone } from '@angular/core';
 import { MapsAPILoader, MouseEvent } from '@agm/core';
-import { MatTable, MatTableDataSource } from '@angular/material/table';
 
-interface Food {
-  value: string;
-  viewValue: string;
-}
+
 interface marker {
   latitude: number;
   longitude: number;
@@ -18,7 +14,6 @@ interface marker {
   name: string;
   position: number;
   color: string;
-  // iconUrl: string;
 }
 
 export interface PeriodicElement {
@@ -34,6 +29,7 @@ export interface PeriodicElement {
 export class Form2Component implements OnInit  {
   
   @Output() backEmitter:EventEmitter<boolean>= new EventEmitter();
+  @Output() secondFormEmitter: EventEmitter<FormGroup> = new EventEmitter();
   
   @ViewChild('search')
   public searchElementRef!: ElementRef;
@@ -59,8 +55,6 @@ export class Form2Component implements OnInit  {
   
   dataSource = new ExampleDataSource(this.dataToDisplay);
   
-  @Output() secondFormEmitter: EventEmitter<FormGroup> = new EventEmitter();
-
   constructor(private _formBuilder: FormBuilder,
       private mapsAPILoader: MapsAPILoader,
       private ngZone: NgZone,
@@ -115,14 +109,14 @@ export class Form2Component implements OnInit  {
 
     this.dataSource = new ExampleDataSource((this.VOForm.get('VORows') as FormArray).controls);
   }
+
   sendForm() {
     this.secondFormEmitter.emit(this.VOForm);
   }
+
   back(){
     this.backEmitter.emit(true)
   }
-
-
 
   removeData(index: number) {
     const control = this.VOForm.get('VORows') as FormArray;
@@ -142,6 +136,7 @@ export class Form2Component implements OnInit  {
       });
     }
   }
+
   //location picked
   mapClicked($event: MouseEvent) {
 
@@ -156,6 +151,7 @@ export class Form2Component implements OnInit  {
     this.AddNewRow(marker);
 
   }
+
   clickedMarker(label: string|undefined, index: number) {
     console.log(`clicked the marker: ${label || index}`);
   }
@@ -188,7 +184,6 @@ export class Form2Component implements OnInit  {
 
   //editing  location details
   EditSVO(VOFormElement: any, i: any) {
-
     VOFormElement.get('VORows').at(i).get('isEditable').patchValue(false);
   }
 
@@ -201,7 +196,8 @@ export class Form2Component implements OnInit  {
   CancelSVO(VOFormElement: any, i: any) {
     VOFormElement.get('VORows').at(i).get('isEditable').patchValue(true);
   }
-//add new  for location details
+
+  //add new  for location details
   AddNewRow(marker: any) {
    
     const control = this.VOForm.get('VORows') as FormArray;
