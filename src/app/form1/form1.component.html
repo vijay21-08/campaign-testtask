@@ -8,14 +8,14 @@
         <form class="example-form" [formGroup]="firstFormGroup">
           <mat-form-field   appearance="outline" class="example-full-width">
             <mat-label>Campaign Objective</mat-label>
-            <input matInput placeholder="Ex. Pizza" value="Sushi" formControlName="campaignObj">
+            <input matInput placeholder="Campaign Objective" formControlName="campaignObj">
           </mat-form-field>
           
           <mat-form-field appearance="outline">
               <mat-label>Campaign Category(Opitional)</mat-label>
               <mat-select formControlName="campaignCat">
-                <mat-option *ngFor="let food of foods" [value]="food.value" >
-                  {{food.viewValue}}
+                <mat-option *ngFor="let category of categorys" [value]="category.value" >
+                  {{category.viewValue}}
                 </mat-option>
               </mat-select>
             </mat-form-field>
@@ -23,8 +23,8 @@
             <mat-form-field appearance="outline">
               <mat-label>Offer Type</mat-label>
               <mat-select formControlName="orderType">
-                <mat-option *ngFor="let food of foods" [value]="food.value">
-                  {{food.viewValue}}
+                <mat-option *ngFor="let category of categorys" [value]="category.value">
+                  {{category.viewValue}}
                 </mat-option>
               </mat-select>
             </mat-form-field>

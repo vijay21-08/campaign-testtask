@@ -10,24 +10,21 @@ interface Food {
   value: string;
   viewValue: string;
 }
+interface marker {
+  latitude: number;
+  longitude: number;
+  label?: string |  undefined;
+  draggable: boolean;
+  name: string;
+  position: number;
+  color: string;
+  // iconUrl: string;
+}
 
 export interface PeriodicElement {
   name: string;
   position: number;
 }
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen'},
-  {position: 2, name: 'Helium'},
-  {position: 3, name: 'Lithium'},
-  {position: 4, name: 'Beryllium'},
-  {position: 5, name: 'Boron'},
-  {position: 6, name: 'Carbon'},
-  {position: 7, name: 'Nitrogen'},
-  {position: 8, name: 'Oxygen'},
-  {position: 9, name: 'Fluorine'},
-  {position: 10, name: 'Neon'},
-];
 
 @Component({
   selector: 'app-form2',
@@ -45,9 +42,20 @@ export class Form2Component implements OnInit  {
   zoom!:number;
   address!: string;
   private geoCoder:any;
+  VOForm!: FormGroup;
+  markers: marker[] = [
+    {
+      latitude: 13.032018316863033,
+      longitude: 13.032018316863033,
+      label: "A",
+      draggable: true,
+      color: "#FFFFFF",
+      name: "A",
+      position: 0
+    }]
 
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataToDisplay = [...ELEMENT_DATA];
+  dataToDisplay = [...this.markers];
   
   dataSource = new ExampleDataSource(this.dataToDisplay);
   
@@ -59,13 +67,7 @@ export class Form2Component implements OnInit  {
   //   // additionalComments: ['', Validators.required],
   // });
   
-  foods: Food[] = [
-    {value: 'steak-0', viewValue: 'Steak'},
-    {value: 'pizza-1', viewValue: 'Pizza'},
-    {value: 'tacos-2', viewValue: 'Tacos'},
-  ];
 
-  VOForm!: FormGroup;
 
   constructor(private _formBuilder: FormBuilder,
       private mapsAPILoader: MapsAPILoader,
@@ -103,9 +105,14 @@ export class Form2Component implements OnInit  {
     });
 
     this.VOForm = this.fb.group({
-      VORows: this.fb.array(ELEMENT_DATA.map(val => this.fb.group({
+      VORows: this.fb.array(this.markers.map(val => this.fb.group({
         position: new FormControl(val.position),
         name: new FormControl(val.name),
+        latitude: new FormControl(''),
+        longitude: new FormControl(''),
+        label: new FormControl(null),
+        color: new FormControl(''),
+        isDraggable: new FormControl(false),
         action: new FormControl('existingRecord'),
         isEditable: new FormControl(true),
         isNewRow: new FormControl(false),
@@ -144,17 +151,54 @@ export class Form2Component implements OnInit  {
       navigator.geolocation.getCurrentPosition((position) => {
         this.latitude = position.coords.latitude;
         this.longitude = position.coords.longitude;
-        this.zoom = 8;
+        this.zoom = 11;
         this.getAddress(this.latitude, this.longitude);
       });
     }
   }
-  markerDragEnd($event: MouseEvent) {
-    console.log($event);
+  mapClicked($event: MouseEvent) {
+    // this.markers.push({
+    //   latitude: $event.coords.lat,
+    //   longitude: $event.coords.lng,
+    //   draggable: true,
+    //   color: '',
+    //   name: '',
+    //   position: 0
+    // });
+    const marker = {
+      latitude: $event.coords.lat,
+      longitude: $event.coords.lng,
+      draggable: true,
+      color: '',
+      name: '',
+      position: 0
+    }
+    this.AddNewRow(marker);
+    // const obj = {
+    //   latitude: $event.coords.lat,
+    //   longitude: $event.coords.lng,
+    //   draggable: true,
+    //   color: '',
+    //   name: '',
+    //   position: 0
+    // }
+    // this.markers = [...this.markers,obj]
+  }
+  clickedMarker(label: string|undefined, index: number) {
+    console.log(`clicked the marker: ${label || index}`);
+  }
+
+  markerDragEnd(m: marker, $event: MouseEvent) {
+    console.log("dragEnd", m, $event);
     this.latitude = $event.coords.lat;
     this.longitude = $event.coords.lng;
     this.getAddress(this.latitude, this.longitude);
   }
+  // markerDragEnd($event: MouseEvent) {
+  //   console.log($event);
+  //   this.latitude = $event.coords.lat;
+  //   this.longitude = $event.coords.lng;
+  // }
   getAddress(latitude:any, longitude: any ){
     this.geoCoder.geocode({ 'location': { lat: latitude, lng: longitude } }, (results:any, status:any) => {
       console.log(results);
@@ -192,11 +236,11 @@ export class Form2Component implements OnInit  {
   }
 
   // @ViewChild('table') table: MatTable<PeriodicElement>;
-  AddNewRow() {
+  AddNewRow(marker: any) {
     // this.getBasicDetails();
     const control = this.VOForm.get('VORows') as FormArray;
     let newIndex: number = control.controls?.length + 1 || 1000; 
-    control.insert(0,this.initiateVOForm(newIndex));
+    control.insert(length,this.initiateVOForm(newIndex, marker));
     this.dataSource = new ExampleDataSource(control.controls)
     // control.controls.unshift(this.initiateVOForm());
     // this.openPanel(panel);
@@ -204,14 +248,18 @@ export class Form2Component implements OnInit  {
       // this.dataSource.data = this.dataSource.data;
   }
 
-  initiateVOForm(newIndex: number): FormGroup {
+  initiateVOForm(newIndex: number, marker: any): FormGroup {
     return this.fb.group({
-
       position: new FormControl(newIndex),
-                name: new FormControl(''),
-                action: new FormControl('newRecord'),
-                isEditable: new FormControl(false),
-                isNewRow: new FormControl(true),
+      name: new FormControl(marker.name),
+      latitude: new FormControl(marker.latitude),
+      longitude: new FormControl(marker.longitude),
+      isDraggable: new FormControl(marker.draggable),
+      label: new FormControl(null),
+      color: new FormControl(marker.color),
+      action: new FormControl('newRecord'),
+      isEditable: new FormControl(false),
+      isNewRow: new FormControl(true),
     });
   }
   

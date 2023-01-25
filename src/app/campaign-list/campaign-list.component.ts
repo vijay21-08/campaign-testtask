@@ -3,13 +3,14 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {Sort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
+// import { AngularFirestore } from '@angular/fire/firestore'
 
 export interface UserData {
   id: string;
   name: string;
   progress: string;
   ctr: number;
-  start_date: string;
+  start_date: any;
   actions:string;
 }
 
@@ -18,20 +19,11 @@ interface Action {
   value: string;
   viewValue: string;
 }
-const FRUITS: string[] = [
-  'blueberry',
-  'lychee',
-  'kiwi',
-  'mango',
-  'peach',
-  'lime',
-  'pomegranate',
-  'pineapple',
-];
+const sorted: string[] = [];
 const PROGRESS: string[] = [
   'Pending',
   'Completed',
-  'Scheduled'
+  'Scheduled',''
 ];
 const NAMES: string[] = [
   'Maia',
@@ -62,31 +54,46 @@ const NAMES: string[] = [
 })
 export class CampaignListComponent {
 
-  displayedColumns: string[] = ['id', 'name', 'progress', 'fruit','start_date','actions'];
+  displayedColumns: string[] = ['id', 'name', 'progress', 'ctr','start_date','actions'];
   dataSource: MatTableDataSource<UserData>;
+  membersList: any[] = [];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   sortedData: string[];
 
   actions: Action[] = [
-    {value: 'edit', viewValue: 'Edit'},
-    {value: 'delete', viewValue: 'Delete'}
+    {value: 'value-1', viewValue: 'Value 1'},
+    {value: 'value-2', viewValue: 'Value 2'}
   ];
-
+  // private firebase : AngularFirestore
   constructor() {
     // Create 100 users
     const users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
-    this.sortedData = FRUITS.slice();
+    this.sortedData = sorted.slice();
 
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource(users);
+  }
+  ngOnit(){
+    this.getAllMembersList();
   }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
+  getAllMembersList(){
+    // this.getAllMember().subscribe((res: any[])=>{
+    //   res.map((e)=>{
+    //     console.log(e.payload.doc.data());
+    //     this.membersList.push(e.payload.doc.data());
+    //   })
+    // },
+    //   (error: any)=>{
+    //    console.log(error);
+    //  });
+ }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -99,7 +106,7 @@ export class CampaignListComponent {
  
 
   sortData(sort: Sort) {
-    const data = FRUITS.slice();
+    const data = sorted.slice();
     if (!sort.active || sort.direction === '') {
       this.sortedData = data;
       return;
@@ -114,6 +121,9 @@ export class CampaignListComponent {
           return 0;
       }
     });
+  }
+  getAllMember(){
+    // return this.firebase.collection('/teamMembers').snapshotChanges();
   }
 }
 function compare(a: number | string, b: number | string, isAsc: boolean) {
@@ -133,7 +143,8 @@ function createNewUser(id: number): UserData {
     name: name,
     progress: PROGRESS[Math.round(Math.random() * 2)],
     ctr: Math.round(Math.random() * 100),
-    start_date:  FRUITS[Math.round(Math.random() * (FRUITS.length - 1))],
+    start_date: new Date(Math.floor(Math.random() * Date.now())),
     actions:''
   };
+  
 }

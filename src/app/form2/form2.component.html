@@ -12,10 +12,14 @@
           <mat-label>Search Location</mat-label>
           <input matInput (keydown.enter)="$event.preventDefault()" #search>
         </mat-form-field>
-
-        <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
-          <agm-marker [latitude]="latitude" [longitude]="longitude" [markerDraggable]="true"
-            (dragEnd)="markerDragEnd($event)"></agm-marker>
+            
+        <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom"
+        (mapClick)="mapClicked($event)">
+            <agm-marker *ngFor="let m of markers; let i = index" (markerClick)="clickedMarker(m.label, i)"
+            [latitude]="m.latitude" [longitude]="m.longitude" [label]="m.label!" [markerDraggable]="m.draggable"
+             (dragEnd)="markerDragEnd(m, $event)">
+          
+          </agm-marker>
         </agm-map>
       </div>
       <div>
@@ -31,7 +35,6 @@
                   </mat-form-field> -->
                 </td>
               </ng-container>
-
               <!-- Name Column -->
               <ng-container matColumnDef="name">
                 <td mat-cell *matCellDef="let element; let i = index" [formGroup]="element">

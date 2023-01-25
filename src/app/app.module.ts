@@ -55,6 +55,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatInputModule,
     MatRadioModule,
     MatExpansionModule,
+    // AngularFireModule.initializeApp(enviroment.firebaseConfig),
+    // AngularFireDatabaseModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyA_S6OnrLoBlHFUm-TKNdJugb-sfS1dJl0',
       libraries: ['places']

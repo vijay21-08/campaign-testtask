@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
-interface Food {
+interface category {
   value: string;
   viewValue: string;
 }
@@ -23,10 +23,10 @@ export class Form1Component {
     additionalComments: ['', Validators.required],
   });
   
-  foods: Food[] = [
-    {value: 'steak-0', viewValue: 'Steak'},
-    {value: 'pizza-1', viewValue: 'Pizza'},
-    {value: 'tacos-2', viewValue: 'Tacos'},
+  categorys: category[] = [
+    {value: 'value-0', viewValue: 'value 1'},
+    {value: 'value-1', viewValue: 'value 2'},
+    {value: 'value-2', viewValue: 'value 3'},
   ];
 
   sendForm() {
