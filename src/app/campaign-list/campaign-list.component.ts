@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import { Component, ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {Sort} from '@angular/material/sort';
@@ -22,11 +22,6 @@ interface Action {
   viewValue: string;
 }
 const sorted: string[] = [];
-// const PROGRESS: string[] = [
-//   'Pending',
-//   'Completed',
-//   'Scheduled',''
-// ];
 
 
 @Component({
@@ -35,6 +30,8 @@ const sorted: string[] = [];
   styleUrls: ['./campaign-list.component.scss']
 })
 export class CampaignListComponent {
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   displayedColumns: string[] = ['id', 'name', 'progress', 'ctr','start_date','actions'];
   dataSource: MatTableDataSource<UserData>;
@@ -43,15 +40,8 @@ export class CampaignListComponent {
   page = 0;
   limit = 20;
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
+  
   sortedData: string[];
-
-  actions: Action[] = [
-    {value: 'value-1', viewValue: 'Value 1'},
-    {value: 'value-2', viewValue: 'Value 2'}
-  ];
-  // private firebase : AngularFirestore
   constructor(public commonService: CommonService,
     private toastr: ToastrService) {
  
@@ -59,10 +49,7 @@ export class CampaignListComponent {
     this.sortedData = sorted.slice();
 
     // Assign the data to the data source for the table to render
-
     this.dataSource = new MatTableDataSource();
-    
-
   }
   ngOnit(){
   }
@@ -81,7 +68,6 @@ export class CampaignListComponent {
     }
   }
  
-
   sortData(sort: Sort) {
     const data = sorted.slice();
     if (!sort.active || sort.direction === '') {
@@ -107,6 +93,7 @@ export class CampaignListComponent {
       }
     });
   }
+
   getAllMember(){
     const startIndex = this.page * this.limit;
     const endIndex = (this.page * this.limit) + this.limit;
@@ -133,34 +120,14 @@ export class CampaignListComponent {
     this.dataSource.data = this.membersList.slice(startIndex, endIndex);
   }
 
- compare(a: number | string, b: number | string, isAsc: boolean) {
-  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
-}
+  compare(a: number | string, b: number | string, isAsc: boolean) {
+    return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
+  }
 
-deleteCampaign(id: string) {
-  this.commonService.deleteCampaign(id).subscribe((res: any) => {
-    this.getAllMember();
-    this.toastr.success('Campaign deleted successfully!');
-  })
-}
-
-/** Builds and returns a new User. */
-//  createNewUser(id: number): UserData {
-//   this.getAllMember()
-//   const name =
-//     NAMES[Math.round(Math.random() * (NAMES.length - 1))] +
-//     ' ' +
-//     NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) +
-//     '.';
-
-//   return {
-//     id: id.toString(),
-//     name: name,
-//     progress: PROGRESS[Math.round(Math.random() * 2)],
-//     ctr: Math.round(Math.random() * 100),
-//     start_date: new Date(Math.floor(Math.random() * Date.now())),
-//     actions:''
-//   };
-  
-// }
+  deleteCampaign(id: string) {
+    this.commonService.deleteCampaign(id).subscribe((res: any) => {
+      this.getAllMember();
+      this.toastr.success('Campaign deleted successfully!');
+    })
+  }
 }
