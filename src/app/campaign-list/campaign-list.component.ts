@@ -3,6 +3,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {Sort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
+import { CommonService } from '../services/common.service';
 // import { AngularFirestore } from '@angular/fire/firestore'
 
 export interface UserData {
@@ -20,32 +21,12 @@ interface Action {
   viewValue: string;
 }
 const sorted: string[] = [];
-const PROGRESS: string[] = [
-  'Pending',
-  'Completed',
-  'Scheduled',''
-];
-const NAMES: string[] = [
-  'Maia',
-  'Asher',
-  'Olivia',
-  'Atticus',
-  'Amelia',
-  'Jack',
-  'Charlotte',
-  'Theodore',
-  'Isla',
-  'Oliver',
-  'Isabella',
-  'Jasper',
-  'Cora',
-  'Levi',
-  'Violet',
-  'Arthur',
-  'Mia',
-  'Thomas',
-  'Elizabeth',
-];
+// const PROGRESS: string[] = [
+//   'Pending',
+//   'Completed',
+//   'Scheduled',''
+// ];
+
 
 @Component({
   selector: 'app-campaign-list',
@@ -67,33 +48,23 @@ export class CampaignListComponent {
     {value: 'value-2', viewValue: 'Value 2'}
   ];
   // private firebase : AngularFirestore
-  constructor() {
-    // Create 100 users
-    const users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
+  constructor(public commonService: CommonService) {
+ 
+    this.getAllMember()
     this.sortedData = sorted.slice();
 
     // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(users);
+
+    this.dataSource = new MatTableDataSource();
+
   }
   ngOnit(){
-    this.getAllMembersList();
   }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
-  getAllMembersList(){
-    // this.getAllMember().subscribe((res: any[])=>{
-    //   res.map((e)=>{
-    //     console.log(e.payload.doc.data());
-    //     this.membersList.push(e.payload.doc.data());
-    //   })
-    // },
-    //   (error: any)=>{
-    //    console.log(error);
-    //  });
- }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -116,35 +87,45 @@ export class CampaignListComponent {
       const isAsc = sort.direction === 'asc';
       switch (sort.active) {
         case 'start_date':
-          return compare(a, b, isAsc);
+          return this.compare(a, b, isAsc);
         default:
           return 0;
       }
     });
   }
   getAllMember(){
-    // return this.firebase.collection('/teamMembers').snapshotChanges();
+      this.commonService.getData().subscribe((res: any) => {
+        res.map((r:any) => {
+          r.ctr=  Math.round(Math.random() * 100)
+          r.start_date= new Date(Math.floor(Math.random() * Date.now()))
+
+        })
+       this.dataSource = res
+        
+      })
   }
-}
-function compare(a: number | string, b: number | string, isAsc: boolean) {
+
+ compare(a: number | string, b: number | string, isAsc: boolean) {
   return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }
 
 /** Builds and returns a new User. */
-function createNewUser(id: number): UserData {
-  const name =
-    NAMES[Math.round(Math.random() * (NAMES.length - 1))] +
-    ' ' +
-    NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) +
-    '.';
+//  createNewUser(id: number): UserData {
+//   this.getAllMember()
+//   const name =
+//     NAMES[Math.round(Math.random() * (NAMES.length - 1))] +
+//     ' ' +
+//     NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) +
+//     '.';
 
-  return {
-    id: id.toString(),
-    name: name,
-    progress: PROGRESS[Math.round(Math.random() * 2)],
-    ctr: Math.round(Math.random() * 100),
-    start_date: new Date(Math.floor(Math.random() * Date.now())),
-    actions:''
-  };
+//   return {
+//     id: id.toString(),
+//     name: name,
+//     progress: PROGRESS[Math.round(Math.random() * 2)],
+//     ctr: Math.round(Math.random() * 100),
+//     start_date: new Date(Math.floor(Math.random() * Date.now())),
+//     actions:''
+//   };
   
+// }
 }

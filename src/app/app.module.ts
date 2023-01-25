@@ -26,6 +26,8 @@ import {MatIconModule} from '@angular/material/icon';
 import { Form4Component } from './form4/form4.component';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { HttpClientModule } from '@angular/common/http';
+
 
 
 @NgModule({
@@ -54,6 +56,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     ReactiveFormsModule,
     MatInputModule,
     MatRadioModule,
+    HttpClientModule,
     MatExpansionModule,
     // AngularFireModule.initializeApp(enviroment.firebaseConfig),
     // AngularFireDatabaseModule,
