@@ -48,6 +48,16 @@ demo-table {
     margin: 0;
   }
 }
+.position-relative {
+  position: relative;
+}
+
+.radius-input {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+}
 ::ng-deep {
   .demo-table {
     thead {
@@ -140,6 +150,7 @@ demo-table {
 }
 
 .two-step-form-table {
-  max-height: calc(100vh - 433px);
+  max-height: calc(100vh - 462px);
   overflow-y: auto;
+  margin-bottom: 60px;
 }

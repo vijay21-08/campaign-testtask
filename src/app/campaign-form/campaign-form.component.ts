@@ -1,6 +1,6 @@
-import {Component, Injectable, ViewChild} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {MatStepper, MatStepperIntl} from '@angular/material/stepper';
+import { Component, Injectable, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatStepper, MatStepperIntl } from '@angular/material/stepper';
 
 @Injectable()
 export class StepperIntl extends MatStepperIntl {
@@ -12,23 +12,26 @@ export class StepperIntl extends MatStepperIntl {
   selector: 'app-campaign-form',
   templateUrl: './campaign-form.component.html',
   styleUrls: ['./campaign-form.component.scss'],
-  providers: [{provide: MatStepperIntl, useClass: StepperIntl}],
+  providers: [{ provide: MatStepperIntl, useClass: StepperIntl }],
 })
 export class CampaignFormComponent {
   @ViewChild('stepper') private myStepper!: MatStepper;
-  
+
   optionalLabelText!: string;
   optionalLabelTextChoices: string[] = ['Option 1', 'Option 2', 'Option 3'];
   form1!: any;
   form2!: any;
   form3!: any;
   showForm4: boolean = false;
-  
+
   secondFormGroup = this._formBuilder.group({
     secondCtrl: ['', Validators.required],
   });
 
-  constructor(private _formBuilder: FormBuilder, private _matStepperIntl: MatStepperIntl) {}
+  constructor(
+    private _formBuilder: FormBuilder,
+    private _matStepperIntl: MatStepperIntl
+  ) {}
 
   updateOptionalLabel() {
     this._matStepperIntl.optionalLabel = this.optionalLabelText;
@@ -37,41 +40,38 @@ export class CampaignFormComponent {
     this._matStepperIntl.changes.next();
   }
 
-  goBack(){
+  goBack() {
     this.myStepper.previous();
   }
 
-  goForward(){
+  goForward() {
     this.myStepper.next();
   }
 
   firstFormSubmission(eve: any) {
-    console.log("First Form Details", eve);
-    if (eve.valid) {
+    console.log('First Form Details', eve);
+    if (true) {
       this.form1 = eve;
       this.goForward();
     } else {
-
     }
   }
 
   secondFormSubmission(eve: any) {
-    console.log("second Form Details", eve);
-    if (eve.valid) {
+    console.log('second Form Details', eve);
+    if (true) {
       this.form2 = eve;
       this.goForward();
     } else {
-      
     }
   }
   thirdFormSubmission(eve: any) {
-    console.log("Third Form Details", eve);
-    if (eve.valid) {
+    console.log('Third Form Details', eve);
+    if (true) {
       this.form3 = eve;
       this.showForm4 = true;
       this.goForward();
     } else {
-      
     }
   }
 }
