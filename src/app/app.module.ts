@@ -53,7 +53,8 @@ import {MatIconModule} from '@angular/material/icon';
     MatRadioModule,
     MatExpansionModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyA_S6OnrLoBlHFUm-TKNdJugb-sfS1dJl0'
+      apiKey: 'AIzaSyA_S6OnrLoBlHFUm-TKNdJugb-sfS1dJl0',
+      libraries: ['places']
     }),
     MatIconModule
   ],
