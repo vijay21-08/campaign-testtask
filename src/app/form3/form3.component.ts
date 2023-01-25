@@ -1,11 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
-interface Food {
-  value: string;
-  viewValue: string;
-}
-
 //data for  dropdown
 const DataFromAPI = {
   valid: true,
@@ -328,15 +323,12 @@ const DataFromAPI = {
   styleUrls: ['./form3.component.scss']
 })
 export class Form3Component {
-  constructor(private _formBuilder: FormBuilder){    
-    this.modulesList = DataFromAPI.data;
-  }
+  @Output() backEmitter:EventEmitter<boolean>= new EventEmitter();
+  @Output() thirdFormEmitter: EventEmitter<any> = new EventEmitter();
 
   search_val: FormControl = new FormControl("");
   search_input: string = "";
-  @Output() backEmitter:EventEmitter<boolean>= new EventEmitter();
-
-  @Output() thirdFormEmitter: EventEmitter<any> = new EventEmitter();
+  
   thirdFormGroup = this._formBuilder.group({
     search: [''],
   });
@@ -346,16 +338,19 @@ export class Form3Component {
   public selectedClassification = 'Read';
 
   public selectionList = ["Read", "Write", "Total"];
+
+  constructor(private _formBuilder: FormBuilder){    
+    this.modulesList = DataFromAPI.data;
+  }
   
   onDropdownItemSelected(eve: any){
-    console.log("Last value selected", eve);
     this.selectedClassification = eve.srcElement.value?.toString();
   }
   
   sendForm() {
-    console.log("Mock data", DataFromAPI)
     this.thirdFormEmitter.emit(DataFromAPI);
   }
+  
   back(){
     this.backEmitter.emit(true)
   }

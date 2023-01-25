@@ -1,5 +1,5 @@
 import { Component, Injectable, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { MatStepper, MatStepperIntl } from '@angular/material/stepper';
 
 @Injectable()
@@ -50,32 +50,26 @@ export class CampaignFormComponent {
 
    //Emitting first form data
   firstFormSubmission(eve: any) {
-    console.log('First Form Details', eve);
     if (true) {
       this.form1 = eve;
       this.goForward();
-    } else {
-    }
+    } 
   }
 
    //Emitting Second form data
   secondFormSubmission(eve: any) {
-    console.log('second Form Details', eve);
     if (true) {
       this.form2 = eve;
       this.goForward();
-    } else {
     }
   }
 
   //Emitting Second form data
   thirdFormSubmission(eve: any) {
-    console.log('Third Form Details', eve);
     if (true) {
       this.form3 = eve;
       this.showForm4 = true;
       this.goForward();
-    } else {
     }
   }
 }

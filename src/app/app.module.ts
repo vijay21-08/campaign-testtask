@@ -65,8 +65,6 @@ import { SummaryComponent } from './summary/summary.component';
     MatRadioModule,
     HttpClientModule,
     MatExpansionModule,
-    // AngularFireModule.initializeApp(enviroment.firebaseConfig),
-    // AngularFireDatabaseModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyA_S6OnrLoBlHFUm-TKNdJugb-sfS1dJl0',
       libraries: ['places']

@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 import { CommonService } from '../services/common.service';
 
 
@@ -37,9 +36,6 @@ export class Form4Component implements OnInit {
   ngOnInit() {
     this.form1 = this.form1.value
     this.form2 = this.form2.value
-    console.log("form 1", this.form1)
-    console.log("form 2", this.form2)
-    console.log("form 3", this.form3)
     this.dataSource = this.form2.VORows;
 
     this.form3.data = this.form3.data.filter(
@@ -85,7 +81,6 @@ export class Form4Component implements OnInit {
     
     this.commonService.postData(body)
       .subscribe((data: any) => {
-        console.log(data)
         this.commonService.showList.next(true);
       })  
   }
