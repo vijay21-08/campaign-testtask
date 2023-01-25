@@ -8,14 +8,13 @@ import { CommonService } from './services/common.service';
 })
 export class AppComponent implements OnInit, OnDestroy {
   constructor(private commonService: CommonService) {}
-  title = 'test-task';
+  title = 'Campaign-test-task';
   isShowForm: boolean = false;
   subscription: any;
 
   ngOnInit() {
     this.subscription = this.commonService.showList.subscribe(
       (res: any) => {
-        console.log(res)
         this.isShowForm = !res;
       }
     )

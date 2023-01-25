@@ -4,22 +4,8 @@ import {DataSource} from '@angular/cdk/collections';
 import {Observable, ReplaySubject} from 'rxjs';
 import {OnInit, ViewChild, ElementRef, NgZone } from '@angular/core';
 import { MapsAPILoader, MouseEvent } from '@agm/core';
+import { marker }from  '../shared/constant'
 
-
-interface marker {
-  latitude: number;
-  longitude: number;
-  label?: string |  undefined;
-  draggable: boolean;
-  name: string;
-  position: number;
-  color: string;
-}
-
-export interface PeriodicElement {
-  name: string;
-  position: number;
-}
 
 @Component({
   selector: 'app-form2',
@@ -109,7 +95,7 @@ export class Form2Component implements OnInit  {
 
     this.dataSource = new ExampleDataSource((this.VOForm.get('VORows') as FormArray).controls);
   }
-
+//emitting second  form
   sendForm() {
     this.secondFormEmitter.emit(this.VOForm);
   }
@@ -117,10 +103,9 @@ export class Form2Component implements OnInit  {
   back(){
     this.backEmitter.emit(true)
   }
-
+//remove data from loactin table
   removeData(index: number) {
     const control = this.VOForm.get('VORows') as FormArray;
-     console.log(control, index)
      control.removeAt(index);
      this.dataSource = new ExampleDataSource(control.controls)
  
@@ -153,11 +138,9 @@ export class Form2Component implements OnInit  {
   }
 
   clickedMarker(label: string|undefined, index: number) {
-    console.log(`clicked the marker: ${label || index}`);
   }
 
   markerDragEnd(m: marker, $event: MouseEvent) {
-    console.log("dragEnd", m, $event);
     this.latitude = $event.coords.lat;
     this.longitude = $event.coords.lng;
     this.getAddress(this.latitude, this.longitude);
@@ -166,8 +149,6 @@ export class Form2Component implements OnInit  {
   //getting address for particular area
   getAddress(latitude:any, longitude: any ){
     this.geoCoder.geocode({ 'location': { lat: latitude, lng: longitude } }, (results:any, status:any) => {
-      console.log(results);
-      console.log(status);
       if (status === 'OK') {
         if (results[0]) {
           this.zoom = 12;

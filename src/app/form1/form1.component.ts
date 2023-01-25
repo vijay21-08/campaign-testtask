@@ -1,11 +1,8 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { CommonService } from '../services/common.service';
+import { category}from  '../shared/constant'
 
-interface category {
-  value: string;
-  viewValue: string;
-}
 
 @Component({
   selector: 'app-form1',
@@ -31,10 +28,11 @@ export class Form1Component {
     {value: 'value-1', viewValue: 'value 2'},
     {value: 'value-2', viewValue: 'value 3'},
   ];
-
+// emiting first form 
   sendForm() {
     this.firstFormEmitter.emit(this.firstFormGroup);
   }
+  //go to listing page
   goToList(){
     this.commonService.showList.next(true);
   }

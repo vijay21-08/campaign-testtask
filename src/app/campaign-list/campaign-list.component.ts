@@ -7,22 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { CommonService } from '../services/common.service';
 import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import { DetailsDialogComponent } from '../details-dialog/details-dialog.component';
-
-export interface UserData {
-  id: string;
-  name: string;
-  progress: string;
-  ctr: number;
-  start_date: any;
-  actions:string;
-}
-
-
-interface Action {
-  value: string;
-  viewValue: string;
-}
-const sorted: string[] = [];
+import { UserData,Action}from  '../shared/constant'
 
 
 @Component({
@@ -37,6 +22,7 @@ export class CampaignListComponent {
   displayedColumns: string[] = ['id', 'name', 'progress', 'ctr','start_date','actions'];
   dataSource: MatTableDataSource<UserData>;
   membersList: any[] = [];
+  sorted: string[] = [];
 
   page = 0;
   limit = 20;
@@ -54,7 +40,7 @@ export class CampaignListComponent {
     private toastr: ToastrService) {
   
     this.getAllMember()
-    this.sortedData = sorted.slice();
+    this.sortedData = this.sorted.slice();
 
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource();
@@ -63,7 +49,6 @@ export class CampaignListComponent {
   openDialog(id: any): void {
     this.commonService.getDataById(id).subscribe(
       (res) => {
-        console.log("data by id", res)
         const dialogRef = this.dialog.open(DetailsDialogComponent, {
           width: '1000px',
           height: '600px',
@@ -71,7 +56,6 @@ export class CampaignListComponent {
         });
     
         dialogRef.afterClosed().subscribe(result => {
-          console.log('The dialog was closed');
         });
       }
     )
@@ -86,6 +70,7 @@ export class CampaignListComponent {
     this.dataSource.sort = this.sort;
   }
 
+//apply filter for campaign list
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -95,8 +80,9 @@ export class CampaignListComponent {
     }
   }
  
+  //sorting data based on label
   sortData(sort: Sort) {
-    const data = sorted.slice();
+    const data = this.sorted.slice();
     if (!sort.active || sort.direction === '') {
       this.sortedData = data;
       return;

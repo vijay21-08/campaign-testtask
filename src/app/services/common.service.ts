@@ -14,19 +14,19 @@ export class CommonService {
   constructor(private http: HttpClient) { }
 
   showList: BehaviorSubject<boolean> = new BehaviorSubject(true);
-
+//get all api
   getData() {
     return this.http.get(`${this.url}/campaign`)
   }
-
+// get api by id
   getDataById(id: string) {
     return this.http.get(`${this.url}/campaign/${id}`);
   }
-
+//delete api
   deleteCampaign(id: string) {
     return this.http.delete(`${this.url}/campaign/${id}`);
   }
-
+//post api
   postData(body: any){
     const headers = { 'content-type': 'application/json'}  
     return this.http.post(`${this.url}/campaign`, body, {'headers':headers});
