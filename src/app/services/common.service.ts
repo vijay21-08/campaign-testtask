@@ -21,4 +21,10 @@ export class CommonService {
   deleteCampaign(id: string) {
     return this.http.delete(`${this.url}/campaign/${id}`);
   }
+  postData(person: any){
+    const headers = { 'content-type': 'application/json'}  
+    const body=JSON.stringify(person);
+    console.log(body)
+    return this.http.post('https://63d113d43f08e4a8ff8fee16.mockapi.io/api/v1/campaign', body,{'headers':headers})
+  }
 }
