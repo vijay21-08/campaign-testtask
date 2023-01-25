@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { CommonService } from '../services/common.service';
 
 interface category {
   value: string;
@@ -12,7 +13,9 @@ interface category {
   styleUrls: ['./form1.component.scss']
 })
 export class Form1Component {
-  constructor(private _formBuilder: FormBuilder) {}
+  constructor(
+    private commonService: CommonService,
+    private _formBuilder: FormBuilder) {}
 
   @Output() firstFormEmitter: EventEmitter<FormGroup> = new EventEmitter();
 
@@ -31,5 +34,8 @@ export class Form1Component {
 
   sendForm() {
     this.firstFormEmitter.emit(this.firstFormGroup);
+  }
+  goToList(){
+    this.commonService.showList.next(true);
   }
 }

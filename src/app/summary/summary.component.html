@@ -33,11 +33,6 @@
         <mat-cell *matCellDef="let element"> {{element.longitude}} </mat-cell>
       </ng-container>
 
-      <ng-container matColumnDef="label">
-        <mat-header-cell *matHeaderCellDef> Label </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.label}} </mat-cell>
-      </ng-container>
-
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>
@@ -47,7 +42,7 @@
     <h2>Audience</h2>
 
     <div class="location-card-wrapper">
-      <div class="location-detail-card" *ngFor="let element1 of form3.data">
+      <div class="location-detail-card" *ngFor="let element1 of form3">
         <h2>{{element1.label}}</h2>
         <div *ngFor="let element2 of element1.children" class="display-flex">
           <h3>&#9;{{element2.label}}</h3>

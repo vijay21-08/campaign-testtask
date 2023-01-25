@@ -47,10 +47,10 @@ export class Form2Component implements OnInit  {
     {
       latitude: 13.032018316863033,
       longitude: 13.032018316863033,
-      label: "A",
+      label: "Location 1",
       draggable: true,
       color: "#FFFFFF",
-      name: "A",
+      name: "Location 1",
       position: 0
     }]
 
@@ -206,7 +206,7 @@ export class Form2Component implements OnInit  {
    
     const control = this.VOForm.get('VORows') as FormArray;
     let newIndex: number = control.controls?.length + 1 || 1000; 
-    control.insert(length,this.initiateVOForm(newIndex, marker));
+    control.insert(newIndex,this.initiateVOForm(newIndex, marker));
     this.dataSource = new ExampleDataSource(control.controls)
   }
 

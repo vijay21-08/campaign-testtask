@@ -11,6 +11,6 @@ export class SummaryComponent {
   @Input() dataSource: any;
 
   
-  displayedColumns: string[] = ['position', 'name', 'latitude', 'longitude', 'label'];
+  displayedColumns: string[] = ['position', 'name', 'latitude', 'longitude'];
 
 }

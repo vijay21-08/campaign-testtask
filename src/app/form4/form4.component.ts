@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { CommonService } from '../services/common.service';
 
 
@@ -10,7 +11,8 @@ import { CommonService } from '../services/common.service';
 })
 export class Form4Component implements OnInit {
 
-  constructor(private commonService: CommonService) {}
+  constructor(private toastr: ToastrService,
+    private commonService: CommonService) {}
 
   @Input() form1!: any;
   @Input() form2!: any;
@@ -31,7 +33,7 @@ export class Form4Component implements OnInit {
     return this.PROGRESS[index];
   }
 
-  displayedColumns: string[] = ['position', 'name', 'latitude', 'longitude', 'label'];
+  displayedColumns: string[] = ['position', 'name', 'latitude', 'longitude'];
   dataSource! :any[];
 
   ngOnInit() {
@@ -87,6 +89,7 @@ export class Form4Component implements OnInit {
       .subscribe((data: any) => {
         console.log(data)
         this.commonService.showList.next(true);
+        this.toastr.success('Campaign saved successfully!');
       })  
   }
 }
