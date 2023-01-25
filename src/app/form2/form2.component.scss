@@ -1,128 +1,167 @@
-
 agm-map {
-    height: 100%;
-  }
-  demo-table {
-    width: 100%;
-  }
-  
-  .demo-button-container {
-    padding-bottom: 16px;
-  }
-  
-  .demo-button + .demo-button {
-    margin-left: 8px;
-  }
-  .full-width{
-    width: 100%;
-  }
-  .grid-ui{
-    display: grid;
-    grid-template-rows: min-content 1fr;
-  }
-  ::ng-deep{
-    .mat-ui-change{
-      margin-top: 20px;
-      .mat-mdc-form-field-subscript-wrapper{
-        display: none;
-      }
+  height: 100%;
+  min-height: 400px;
+  width: 100%;
+}
+demo-table {
+  width: 100%;
+}
+
+.demo-button-container {
+  padding-bottom: 16px;
+}
+
+.demo-button + .demo-button {
+  margin-left: 8px;
+}
+.full-width {
+  width: 100%;
+}
+.grid-ui {
+  display: grid;
+  grid-template-rows: min-content 1fr;
+}
+::ng-deep {
+  .mat-ui-change {
+    margin-top: 20px;
+    .mat-mdc-form-field-subscript-wrapper {
+      display: none;
     }
   }
-  .flex-ui{
+}
+.flex-ui {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  div {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    div{
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
+    gap: 15px;
   }
-  .primary-btn {
-    padding: 10px 30px;
-    background-color: #1162ff;
-    color: #fff;
-    height: auto;
-    width: fit-content;
+}
+.primary-btn {
+  padding: 10px 30px;
+  background-color: #1162ff;
+  color: #fff;
+  height: auto;
+  width: fit-content;
+}
+.secondary-btn {
+  padding: 10px 30px;
+  background-color: #fff;
+  color: #1162ff;
+  border: 1px solid #1162ff;
+  height: auto;
+  width: fit-content;
+}
+.dull-btn {
+  padding: 10px 30px;
+  background-color: #ccc;
+  color: #333;
+  height: auto;
+  width: fit-content;
+}
+.demo-button {
+  box-shadow: none;
+  min-width: auto;
+  padding: 10px;
+  background: transparent;
+  .mat-icon {
+    margin: 0;
   }
-  .secondary-btn {
-    padding: 10px 30px;
-    background-color: #FFF;
-    color: #1162ff;
-    border: 1px solid #1162ff;
-    height: auto;
-    width: fit-content;
-  }
-  .dull-btn {
-    padding: 10px 30px;
-    background-color: #ccc;
-    color: #333;
-    height: auto;
-    width: fit-content;
-  }
-  .demo-button{
-    box-shadow: none;
-    min-width: auto;
-    padding: 10px;
-    background: transparent;
-    .mat-icon{
-      margin: 0;
-    }
-
-  }
-::ng-deep{
-  .demo-table{
-    thead{
-      tr{
-        th{
-          &:first-child{
+}
+::ng-deep {
+  .demo-table {
+    thead {
+      tr {
+        th {
+          &:first-child {
             width: 50px;
           }
-          &:last-child{
+          &:last-child {
             width: 50px;
             padding: 0;
           }
-          &:nth-child(3){
+          &:nth-child(3) {
             width: 50px;
           }
         }
       }
     }
-    tbody{
-      tr{
-        td{
-          &:first-child{
+    tbody {
+      tr {
+        td {
+          &:first-child {
             width: 50px;
           }
-          &:last-child{
+          &:last-child {
             width: 50px;
             padding: 0;
           }
-          &:nth-child(3){
+          &:nth-child(3) {
             width: 50px;
           }
-          &:has(.left-td){
+          &:has(.left-td) {
             padding: 2px 0px 2px 6px;
           }
-          .left-td{
-            border-radius: 5px 0 0 5px;
-            background-color: #f4f5f6;
-            padding: 8px 10px;
+          .left-td {
             border-style: none;
+            .mat-mdc-form-field {
+              width: 100%;
+              .mat-mdc-text-field-wrapper {
+                padding: 0;
+                .mat-mdc-form-field-flex {
+                  .mdc-notched-outline {
+                    display: none;
+                  }
+                  .mat-mdc-form-field-infix {
+                    width: 100%;
+                    padding: 0;
+                    min-height: auto;
+                    input {
+                      background-color: #f4f5f6;
+                      border-radius: 5px 0 0 5px;
+                      padding: 6px 10px;
+                    }
+                  }
+                }
+                .mdc-line-ripple {
+                  display: none;
+                }
+              }
+              .mat-mdc-form-field-subscript-wrapper {
+                display: none;
+              }
+            }
           }
-          .right-td{
+          .right-td {
             border-radius: 0px 5px 5px 0px;
             background-color: #f4f5f6;
-            button{
+            button {
               display: block;
               margin-left: auto;
             }
+            .save-btn {
+              border-radius: 0px 5px 5px 0px;
+              border: none;
+              outline: none;
+              color: #333;
+              font-size: 14px;
+              font-weight: 500;
+              padding: 10px;
+              background-color: transparent;
+            }
           }
-          &:has(.right-td){
+          &:has(.right-td) {
             padding: 2px 6px 2px 0px;
           }
         }
       }
     }
   }
+}
+
+.two-step-form-table {
+  max-height: calc(100vh - 433px);
+  overflow-y: auto;
 }

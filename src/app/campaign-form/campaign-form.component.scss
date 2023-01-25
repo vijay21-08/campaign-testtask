@@ -1,15 +1,15 @@
-  .demo-radio-group {
-    display: flex;
-    flex-direction: column;
-    margin: 15px 0;
-  }
-  
-  .demo-radio-button {
-    margin: 5px;
-  }
-  
-  ::ng-deep .mat-horizontal-stepper-header{
-    pointer-events: none !important;    
+.demo-radio-group {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+}
+
+.demo-radio-button {
+  margin: 5px;
+}
+
+::ng-deep .mat-horizontal-stepper-header {
+  pointer-events: none !important;
 }
 ::ng-deep {
   .demo-stepper {
@@ -33,6 +33,33 @@
           }
           &:last-child {
             padding-right: 0;
+          }
+        }
+        &:has(:nth-child(3)[ng-reflect-selected="true"]) {
+          .mat-step-header:first-child {
+            opacity: 1;
+            .mat-step-icon {
+              background-color: #1162ff;
+            }
+          }
+        }
+        &:has(:nth-child(5)[ng-reflect-selected="true"]) {
+          .mat-step-header:nth-child(3),
+          .mat-step-header:first-child {
+            opacity: 1;
+            .mat-step-icon {
+              background-color: #1162ff;
+            }
+          }
+        }
+        &:has(:nth-child(7)[ng-reflect-selected="true"]) {
+          .mat-step-header:first-child,
+          .mat-step-header:nth-child(3),
+          .mat-step-header:nth-child(5) {
+            opacity: 1;
+            .mat-step-icon {
+              background-color: #1162ff;
+            }
           }
         }
         .mat-stepper-horizontal-line {
@@ -59,6 +86,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 15px;
+
             .example-full-width {
               grid-column: 1/-1;
             }
