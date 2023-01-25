@@ -6,6 +6,8 @@ import {MatTableDataSource} from '@angular/material/table';
 import { ToastrService } from 'ngx-toastr';
 import { CommonService } from '../services/common.service';
 // import { AngularFirestore } from '@angular/fire/firestore'
+import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import { Form4Component} from '../form4/form4.component'
 
 export interface UserData {
   id: string;
@@ -41,16 +43,36 @@ export class CampaignListComponent {
   limit = 20;
 
   
-  sortedData: string[];
-  constructor(public commonService: CommonService,
+  sortedData: string[]
+
+  actions: Action[] = [
+    {value: 'value-1', viewValue: 'Value 1'},
+    {value: 'value-2', viewValue: 'Value 2'}
+  ];
+  // private firebase : AngularFirestore
+  constructor(public dialog: MatDialog,
+    public commonService: CommonService,
     private toastr: ToastrService) {
+      
  
     this.getAllMember()
     this.sortedData = sorted.slice();
+    
 
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource();
   }
+  openDialog(): void {
+    const dialogRef = this.dialog.open(Form4Component, {
+      data:"strgn"
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
+
   ngOnit(){
   }
 

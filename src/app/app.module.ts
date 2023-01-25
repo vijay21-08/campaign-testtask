@@ -27,6 +27,7 @@ import { Form4Component } from './form4/form4.component';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { HttpClientModule } from '@angular/common/http';
+import {MatDialogModule} from '@angular/material/dialog';
 
 import { ToastrModule } from 'ngx-toastr';
 
@@ -69,7 +70,8 @@ import { ToastrModule } from 'ngx-toastr';
     MatIconModule,
     MatMenuModule,
     MatCheckboxModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
