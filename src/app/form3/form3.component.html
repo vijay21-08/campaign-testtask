@@ -7,18 +7,11 @@
     </mat-expansion-panel-header>
     <mat-card>
   <mat-card-content>
-    <!-- <form class="example-form" [formGroup]="thirdFormGroup"> -->
     <form class="example-form" >
       <div class="display_flex">
       <mat-form-field class="example-full-width">
         <input matInput placeholder="Search"  [formControl]="search_val" [ngModel]="search_input">
       </mat-form-field>
-      <!-- <mat-form-field class="dropdown"> -->
-        <!-- <div  #levelOneTrigger="matMenuTrigger" [matMenuTriggerFor]="levelOne" (click)="levelOneTrigger.openMenu()"> -->
-          <!-- <mat-select #mySelect [(ngModel)]="selectedClassification" name="select-control" [disabled]="false"
-          #levelOneTrigger="matMenuTrigger" [matMenuTriggerFor]="levelOne" (click)="levelOneTrigger.openMenu()" value="Browse">
-            <mat-option class="mat-drop-remove" *ngFor="let category of selectionList" [value]="category">{{category}}</mat-option>
-          </mat-select> -->
           <button
           mat-button
           class="dropdown"
@@ -29,8 +22,6 @@
           >Browse
           <mat-icon>keyboard_arrow_down</mat-icon>
           </button>
-        <!-- </div> -->
-        <!-- </mat-form-field> -->
       </div>
       <mat-menu #levelOne="matMenu" direction="down" yPosition="below">
         <ng-container *ngFor="let menuItem of modulesList; let i = index">   

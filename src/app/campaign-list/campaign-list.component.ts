@@ -5,9 +5,7 @@ import {Sort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { ToastrService } from 'ngx-toastr';
 import { CommonService } from '../services/common.service';
-// import { AngularFirestore } from '@angular/fire/firestore'
 import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import { Form4Component} from '../form4/form4.component'
 import { DetailsDialogComponent } from '../details-dialog/details-dialog.component';
 
 export interface UserData {
@@ -19,7 +17,7 @@ export interface UserData {
   actions:string;
 }
 
-/** Constants used to fill up our data base. */
+
 interface Action {
   value: string;
   viewValue: string;
@@ -54,15 +52,14 @@ export class CampaignListComponent {
   constructor(public dialog: MatDialog,
     public commonService: CommonService,
     private toastr: ToastrService) {
-      
- 
+  
     this.getAllMember()
     this.sortedData = sorted.slice();
-    
 
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource();
   }
+//open campaign detail summary page
   openDialog(id: any): void {
     this.commonService.getDataById(id).subscribe(
       (res) => {
@@ -122,6 +119,7 @@ export class CampaignListComponent {
     });
   }
 
+  // getting all  campaign member details
   getAllMember(){
     const startIndex = this.page * this.limit;
     const endIndex = (this.page * this.limit) + this.limit;
@@ -152,6 +150,7 @@ export class CampaignListComponent {
     return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
   }
 
+  // deleting campaign member by id
   deleteCampaign(id: string) {
     this.commonService.deleteCampaign(id).subscribe((res: any) => {
       this.getAllMember();
