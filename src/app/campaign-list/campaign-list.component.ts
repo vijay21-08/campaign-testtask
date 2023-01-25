@@ -1,11 +1,10 @@
 import { Component, ViewChild} from '@angular/core';
-import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {Sort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { ToastrService } from 'ngx-toastr';
 import { CommonService } from '../services/common.service';
-import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {MatDialog} from '@angular/material/dialog';
 import { DetailsDialogComponent } from '../details-dialog/details-dialog.component';
 import { UserData,Action}from  '../shared/constant'
 
@@ -16,7 +15,6 @@ import { UserData,Action}from  '../shared/constant'
   styleUrls: ['./campaign-list.component.scss']
 })
 export class CampaignListComponent {
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   displayedColumns: string[] = ['id', 'name', 'progress', 'ctr','start_date','actions'];
@@ -25,15 +23,9 @@ export class CampaignListComponent {
   sorted: string[] = [];
 
   page = 0;
-  limit = 20;
-
-  
+  limit = 5;
   sortedData: string[]
 
-  actions: Action[] = [
-    {value: 'value-1', viewValue: 'Value 1'},
-    {value: 'value-2', viewValue: 'Value 2'}
-  ];
   // private firebase : AngularFirestore
   constructor(public dialog: MatDialog,
     public commonService: CommonService,
@@ -45,39 +37,12 @@ export class CampaignListComponent {
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource();
   }
-//open campaign detail summary page
-  openDialog(id: any): void {
-    this.commonService.getDataById(id).subscribe(
-      (res) => {
-        const dialogRef = this.dialog.open(DetailsDialogComponent, {
-          width: '1000px',
-          height: '600px',
-          data:res
-        });
-    
-        dialogRef.afterClosed().subscribe(result => {
-        });
-      }
-    )
-  }
-
 
   ngOnit(){
   }
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-  }
-
-//apply filter for campaign list
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
   }
  
   //sorting data based on label
@@ -145,4 +110,21 @@ export class CampaignListComponent {
       this.toastr.success('Campaign deleted successfully!');
     })
   }
+
+  //open campaign detail summary page
+  openDialog(id: any): void {
+    this.commonService.getDataById(id).subscribe(
+      (res) => {
+        const dialogRef = this.dialog.open(DetailsDialogComponent, {
+          width: '1000px',
+          height: '600px',
+          data:res
+        });
+    
+        dialogRef.afterClosed().subscribe(result => {
+        });
+      }
+    )
+  }
+
 }

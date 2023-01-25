@@ -28,10 +28,12 @@ export class Form1Component {
     {value: 'value-1', viewValue: 'value 2'},
     {value: 'value-2', viewValue: 'value 3'},
   ];
+
 // emiting first form 
   sendForm() {
     this.firstFormEmitter.emit(this.firstFormGroup);
   }
+  
   //go to listing page
   goToList(){
     this.commonService.showList.next(true);
