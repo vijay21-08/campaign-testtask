@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { enviroment } from 'src/environment/environment';
+import { BehaviorSubject } from 'rxjs';
 
 
 @Injectable({
@@ -12,7 +13,7 @@ export class CommonService {
 
   constructor(private http: HttpClient) { }
 
-
+  showList: BehaviorSubject<boolean> = new BehaviorSubject(true);
 
   getData() {
     return this.http.get(`${this.url}/campaign`)

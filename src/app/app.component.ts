@@ -1,15 +1,31 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { CommonService } from './services/common.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit, OnDestroy {
+  constructor(private commonService: CommonService) {}
   title = 'test-task';
   isShowForm: boolean = false;
+  subscription: any;
+
+  ngOnInit() {
+    this.subscription = this.commonService.showList.subscribe(
+      (res: any) => {
+        console.log(res)
+        this.isShowForm = !res;
+      }
+    )
+  }
 
   handleClick() {
     this.isShowForm = true;
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

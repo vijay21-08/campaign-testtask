@@ -19,9 +19,9 @@ export class CampaignFormComponent {
   
   optionalLabelText!: string;
   optionalLabelTextChoices: string[] = ['Option 1', 'Option 2', 'Option 3'];
-  form1!: FormGroup;
-  form2!: FormGroup;
-  form3!: FormGroup;
+  form1!: any;
+  form2!: any;
+  form3!: any;
   showForm4: boolean = false;
   
   secondFormGroup = this._formBuilder.group({

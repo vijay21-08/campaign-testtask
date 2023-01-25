@@ -9,33 +9,45 @@
   <mat-card-content>
     <!-- <form class="example-form" [formGroup]="thirdFormGroup"> -->
     <form class="example-form" >
+      <div class="display_flex">
       <mat-form-field class="example-full-width">
         <input matInput placeholder="Search"  [formControl]="search_val" [ngModel]="search_input">
       </mat-form-field>
-      <mat-form-field class="dropdown">
+      <!-- <mat-form-field class="dropdown"> -->
         <!-- <div  #levelOneTrigger="matMenuTrigger" [matMenuTriggerFor]="levelOne" (click)="levelOneTrigger.openMenu()"> -->
-          <mat-select #mySelect [(ngModel)]="selectedClassification" name="select-control" [disabled]="false"
-          #levelOneTrigger="matMenuTrigger" [matMenuTriggerFor]="levelOne" (click)="levelOneTrigger.openMenu()">
+          <!-- <mat-select #mySelect [(ngModel)]="selectedClassification" name="select-control" [disabled]="false"
+          #levelOneTrigger="matMenuTrigger" [matMenuTriggerFor]="levelOne" (click)="levelOneTrigger.openMenu()" value="Browse">
             <mat-option class="mat-drop-remove" *ngFor="let category of selectionList" [value]="category">{{category}}</mat-option>
-          </mat-select>
+          </mat-select> -->
+          <button
+          mat-button
+          class="dropdown"
+          #mySelect
+          #levelOneTrigger="matMenuTrigger" 
+          [matMenuTriggerFor]="levelOne" 
+          (click)="levelOneTrigger.openMenu()"
+          >Browse
+          <mat-icon>keyboard_arrow_down</mat-icon>
+          </button>
         <!-- </div> -->
-        </mat-form-field>
+        <!-- </mat-form-field> -->
+      </div>
       <mat-menu #levelOne="matMenu" direction="down" yPosition="below">
-        <ng-container *ngFor="let menuItem of modulesList">   
+        <ng-container *ngFor="let menuItem of modulesList; let i = index">   
         <span (mouseleave)="levelOneTrigger.closeMenu()"></span>
         <ng-container>
             <li mat-menu-item [matMenuTriggerFor]="levelTwo">
               <span>{{menuItem.label}}</span>
               </li>
               <mat-menu #levelTwo="matMenu">
-                  <ng-container *ngFor="let child2 of menuItem.children">
+                  <ng-container *ngFor="let child2 of menuItem.children; let j = index">
                     <button mat-menu-item [matMenuTriggerFor]="levelThree">
                     {{child2.label}}
                     </button>
                     <mat-menu #levelThree="matMenu">
-                  <ng-container *ngFor="let child3 of child2.children">
+                  <ng-container *ngFor="let child3 of child2.children; let k = index">
                     <button mat-menu-item [value]="child3.label" (click)="onDropdownItemSelected($event)" [ngClass]="{'selectedMenu': child3.label === selectedClassification}">
-                      <mat-checkbox class="mat-menu-item">{{child3.label}}</mat-checkbox>  
+                      <mat-checkbox [name]="'child3' + i + j + k" class="mat-menu-item" [(ngModel)]="child3.checked">{{child3.label}}</mat-checkbox>  
                     </button>
                   </ng-container>
               </mat-menu>

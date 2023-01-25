@@ -62,9 +62,13 @@ export class CampaignListComponent {
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource();
   }
-  openDialog(): void {
+  openDialog(id: any): void {
+    // this.commonService.getData()
     const dialogRef = this.dialog.open(Form4Component, {
-      data:"strgn"
+      data:{
+        data: "dummy data",
+        byPopup: true,
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
