@@ -1,66 +1,12 @@
-<h1>Campaign Summary</h1>
+<div class="form-four-container">
+  <h1 class="main-title">Campaign Summary</h1>
 
-<h1>Campaign Details</h1>
+  <app-summary [dataSource]="data.locationDetails" [form1]="data.campaignDetails" [form3]="data.audience"></app-summary>
 
-<p> <strong>campaign Category: </strong>{{form1.campaignCat}}</p>
-<p> <strong>campaign Object: </strong>{{form1.campaignObj}}</p>
-<p> <strong>Order Type: </strong>{{form1.orderType}}</p>
-<p> <strong>Addititonal Comments: </strong>{{form1.additionalComments}}</p>
-
-<h1>Location Details</h1>
-
-<mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-    <!-- Position Column -->
-    <ng-container matColumnDef="position">
-      <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
-      <mat-cell *matCellDef="let element; let i = index"> {{i + 1}} </mat-cell>
-    </ng-container>
-  
-    <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="latitude">
-      <mat-header-cell *matHeaderCellDef> Latitude </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.latitude}} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="longitude">
-      <mat-header-cell *matHeaderCellDef> Longitude </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.longitude}} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="label">
-      <mat-header-cell *matHeaderCellDef> Label </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.label}} </mat-cell>
-    </ng-container>
-  
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-  </mat-table>
-
-  <h1>Audience</h1>
-
-  <div *ngFor="let element1 of form3">
-    <h2>{{element1.label}}</h2>
-    <div *ngFor="let element2 of element1.children">
-        <h3>&#9;{{element2.label}}</h3>
-            <div *ngFor="let element3 of element2.children">
-                <ng-container *ngIf="element3.checked">
-                    <h6>&#9;&#9;{{element3.label}}</h6>
-                </ng-container>
-            </div>
-    </div>
-    <div class="close-btn">
-        <button
-        class="primary-btn"
-        mat-button
-        (click)="onclose()"
-        >
-            Close
-        </button>
-      </div>
+  <div class="save-btn">
+    <button class="primary-btn" mat-button  (click)="onclose()">
+      Close
+    </button>
   </div>
-    
+
+</div>

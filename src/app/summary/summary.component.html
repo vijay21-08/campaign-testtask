@@ -1,0 +1,62 @@
+<div class="detail-card">
+    <h2>Campaign Details</h2>
+
+    <p> <strong>campaign Category </strong> {{form1.campaignCat}}</p>
+    <p> <strong>campaign Object </strong> {{form1.campaignObj}}</p>
+    <p> <strong>Order Type </strong> {{form1.orderType}}</p>
+    <p> <strong>Addititonal Comments </strong> {{form1.additionalComments}}</p>
+  </div>
+
+  <div class="detail-card">
+    <h2>Location Details</h2>
+
+    <mat-table [dataSource]="dataSource" class="mat-elevation-z8 form-four-table">
+      <!-- Position Column -->
+      <ng-container matColumnDef="position">
+        <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+        <mat-cell *matCellDef="let element; let i = index"> {{i + 1}} </mat-cell>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="latitude">
+        <mat-header-cell *matHeaderCellDef> Latitude </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.latitude}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="longitude">
+        <mat-header-cell *matHeaderCellDef> Longitude </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.longitude}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="label">
+        <mat-header-cell *matHeaderCellDef> Label </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.label}} </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
+
+  <div class="detail-card">
+    <h2>Audience</h2>
+
+    <div class="location-card-wrapper">
+      <div class="location-detail-card" *ngFor="let element1 of form3.data">
+        <h2>{{element1.label}}</h2>
+        <div *ngFor="let element2 of element1.children" class="display-flex">
+          <h3>&#9;{{element2.label}}</h3>
+          <div *ngFor="let element3 of element2.children">
+            <ng-container *ngIf="element3.checked">
+              <p>&#9;&#9;{{element3.label}}</p>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

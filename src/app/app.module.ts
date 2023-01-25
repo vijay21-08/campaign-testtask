@@ -31,6 +31,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 
 import { ToastrModule } from 'ngx-toastr';
 import { DetailsDialogComponent } from './details-dialog/details-dialog.component';
+import { SummaryComponent } from './summary/summary.component';
 
 
 
@@ -43,7 +44,8 @@ import { DetailsDialogComponent } from './details-dialog/details-dialog.componen
     Form2Component,
     Form3Component,
     Form4Component,
-    DetailsDialogComponent
+    DetailsDialogComponent,
+    SummaryComponent
   ],
   imports: [
     BrowserModule,

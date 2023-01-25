@@ -68,6 +68,8 @@ export class CampaignListComponent {
       (res) => {
         console.log("data by id", res)
         const dialogRef = this.dialog.open(DetailsDialogComponent, {
+          width: '1000px',
+          height: '600px',
           data:res
         });
     
