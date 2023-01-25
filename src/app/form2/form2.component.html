@@ -29,15 +29,11 @@
               <ng-container matColumnDef="position">
                 <td mat-cell *matCellDef="let element; let i = index" [formGroup]="element">
                   {{i + 1}}
-                  <!-- <mat-form-field style="width: 70px;" appearance="outline">
-                    <input matInput type="text" formControlName="position" [readonly]="true">
-                  </mat-form-field> -->
                 </td>
               </ng-container>
               <!-- Name Column -->
               <ng-container matColumnDef="name">
                 <td mat-cell *matCellDef="let element; let i = index" [formGroup]="element">
-                  <!-- <input [value]="element.name" class="left-td"> -->
                   <div class="left-td">
                     <mat-form-field [appearance]="VOForm.get('VORows')?.value[i]?.isEditable? 'fill' : 'outline'">
                       <input matInput class="left-td" type="text" formControlName="name"

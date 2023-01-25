@@ -1,8 +1,6 @@
 <mat-stepper class="demo-stepper" #stepper>
-  <!-- <mat-step [stepControl]="firstFormGroup"> -->
   <mat-step label="Campaign Detail">
     <app-form1 (firstFormEmitter)="firstFormSubmission($event)"></app-form1>
-    <!-- <app-form3 (backEmitter)="goBack()"(thirdFormEmitter)="thirdFormSubmission($event)"></app-form3> -->
   </mat-step>
   <mat-step label="Location Detail">
     <app-form2 (backEmitter)="goBack()" (secondFormEmitter)="secondFormSubmission($event)"></app-form2>
@@ -15,7 +13,6 @@
     </app-form4>
     <div>
       <button mat-button matStepperPrevious>Back</button>
-      <!-- <button mat-button (click)="stepper.reset()">Reset</button> -->
     </div>
   </mat-step>
 </mat-stepper>

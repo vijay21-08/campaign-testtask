@@ -6,6 +6,7 @@ interface Food {
   viewValue: string;
 }
 
+//data for  dropdown
 const DataFromAPI = {
   valid: true,
   data: [
@@ -353,7 +354,6 @@ export class Form3Component {
   
   sendForm() {
     console.log("Mock data", DataFromAPI)
-    // this.thirdFormEmitter.emit(this.thirdFormGroup);
     this.thirdFormEmitter.emit(DataFromAPI);
   }
   back(){

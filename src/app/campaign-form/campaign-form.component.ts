@@ -35,19 +35,20 @@ export class CampaignFormComponent {
 
   updateOptionalLabel() {
     this._matStepperIntl.optionalLabel = this.optionalLabelText;
-    // Required for the optional label text to be updated
-    // Notifies the MatStepperIntl service that a change has been made
     this._matStepperIntl.changes.next();
   }
 
-  goBack() {
+  //stepper previous
+  goBack(){
     this.myStepper.previous();
   }
 
-  goForward() {
+  //stepper next
+  goForward(){
     this.myStepper.next();
   }
 
+   //Emitting first form data
   firstFormSubmission(eve: any) {
     console.log('First Form Details', eve);
     if (true) {
@@ -57,6 +58,7 @@ export class CampaignFormComponent {
     }
   }
 
+   //Emitting Second form data
   secondFormSubmission(eve: any) {
     console.log('second Form Details', eve);
     if (true) {
@@ -65,6 +67,8 @@ export class CampaignFormComponent {
     } else {
     }
   }
+
+  //Emitting Second form data
   thirdFormSubmission(eve: any) {
     console.log('Third Form Details', eve);
     if (true) {

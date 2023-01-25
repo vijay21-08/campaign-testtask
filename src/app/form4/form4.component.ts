@@ -67,24 +67,9 @@ export class Form4Component implements OnInit {
         }
       )
     }
-
-    // this.form3.data = this.form3.data.map(
-    //   (ele1: any) => {
-    //     return ele1.children.filter(
-    //       (ele2: any) => {
-    //         return ele2.children.some(
-    //           (ele3: any) => {
-    //             return ele3.checked;
-    //           }
-    //         )
-    //       }
-    //     )
-    //   }
-    // )
-
-    console.log(this.form3)
   }
 
+  //final overall data send to api
   sendData() {
     const finalData = {
       campaignDetails: this.form1,
@@ -95,12 +80,13 @@ export class Form4Component implements OnInit {
       progress: this.generateProgress(),
       start_date: new Date(),
     }
-
-    this.commonService.postData(finalData)
+   
+    const body=JSON.stringify(finalData);
+    
+    this.commonService.postData(body)
       .subscribe((data: any) => {
         console.log(data)
         this.commonService.showList.next(true);
-        // this.getAllMember()
       })  
   }
 }

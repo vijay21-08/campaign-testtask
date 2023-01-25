@@ -60,14 +60,6 @@ export class Form2Component implements OnInit  {
   dataSource = new ExampleDataSource(this.dataToDisplay);
   
   @Output() secondFormEmitter: EventEmitter<FormGroup> = new EventEmitter();
-  // secondFormGroup = this._formBuilder.group({
-  //   radius: ['', Validators.required],
-  //   // campaignCat: ['', Validators.required],
-  //   // orderType: ['', Validators.required],
-  //   // additionalComments: ['', Validators.required],
-  // });
-  
-
 
   constructor(private _formBuilder: FormBuilder,
       private mapsAPILoader: MapsAPILoader,
@@ -131,19 +123,13 @@ export class Form2Component implements OnInit  {
   }
 
 
-  // editData() {
-  //   const randomElementIndex = Math.floor(Math.random() * ELEMENT_DATA.length);
-  //   this.dataToDisplay = [...this.dataToDisplay, ELEMENT_DATA[randomElementIndex]];
-  //   this.dataSource.setData(this.dataToDisplay);
-  // }
 
   removeData(index: number) {
     const control = this.VOForm.get('VORows') as FormArray;
      console.log(control, index)
      control.removeAt(index);
      this.dataSource = new ExampleDataSource(control.controls)
-    // this.dataToDisplay = this.dataToDisplay.slice(0, -1);
-    // this.dataSource.setData(this.dataToDisplay);
+ 
   }
  // Get Current Location Coordinates
   private setCurrentLocation() {
@@ -156,15 +142,9 @@ export class Form2Component implements OnInit  {
       });
     }
   }
+  //location picked
   mapClicked($event: MouseEvent) {
-    // this.markers.push({
-    //   latitude: $event.coords.lat,
-    //   longitude: $event.coords.lng,
-    //   draggable: true,
-    //   color: '',
-    //   name: '',
-    //   position: 0
-    // });
+
     const marker = {
       latitude: $event.coords.lat,
       longitude: $event.coords.lng,
@@ -174,15 +154,7 @@ export class Form2Component implements OnInit  {
       position: 0
     }
     this.AddNewRow(marker);
-    // const obj = {
-    //   latitude: $event.coords.lat,
-    //   longitude: $event.coords.lng,
-    //   draggable: true,
-    //   color: '',
-    //   name: '',
-    //   position: 0
-    // }
-    // this.markers = [...this.markers,obj]
+
   }
   clickedMarker(label: string|undefined, index: number) {
     console.log(`clicked the marker: ${label || index}`);
@@ -194,11 +166,8 @@ export class Form2Component implements OnInit  {
     this.longitude = $event.coords.lng;
     this.getAddress(this.latitude, this.longitude);
   }
-  // markerDragEnd($event: MouseEvent) {
-  //   console.log($event);
-  //   this.latitude = $event.coords.lat;
-  //   this.longitude = $event.coords.lng;
-  // }
+
+  //getting address for particular area
   getAddress(latitude:any, longitude: any ){
     this.geoCoder.geocode({ 'location': { lat: latitude, lng: longitude } }, (results:any, status:any) => {
       console.log(results);
@@ -217,35 +186,28 @@ export class Form2Component implements OnInit  {
     });
   }
 
+  //editing  location details
   EditSVO(VOFormElement: any, i: any) {
 
-    // VOFormElement.get('VORows').at(i).get('name').disabled(false)
     VOFormElement.get('VORows').at(i).get('isEditable').patchValue(false);
-    // this.isEditableNew = true;
   }
 
-  // On click of correct button in table (after click on edit) this method will call
+  // save  location name with details
   SaveVO(VOFormElement: any, i: any) {
-    // alert('SaveVO')
     VOFormElement.get('VORows').at(i).get('isEditable').patchValue(true);
   }
 
-  // On click of cancel button in the table (after click on edit) this method will call and reset the previous data
+  // cancel location details 
   CancelSVO(VOFormElement: any, i: any) {
     VOFormElement.get('VORows').at(i).get('isEditable').patchValue(true);
   }
-
-  // @ViewChild('table') table: MatTable<PeriodicElement>;
+//add new  for location details
   AddNewRow(marker: any) {
-    // this.getBasicDetails();
+   
     const control = this.VOForm.get('VORows') as FormArray;
     let newIndex: number = control.controls?.length + 1 || 1000; 
     control.insert(length,this.initiateVOForm(newIndex, marker));
     this.dataSource = new ExampleDataSource(control.controls)
-    // control.controls.unshift(this.initiateVOForm());
-    // this.openPanel(panel);
-      // this.table.renderRows();
-      // this.dataSource.data = this.dataSource.data;
   }
 
   initiateVOForm(newIndex: number, marker: any): FormGroup {
