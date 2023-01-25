@@ -19,9 +19,14 @@ export class CommonService {
     return this.http.get(`${this.url}/campaign`)
   }
 
+  getDataById(id: string) {
+    return this.http.get(`${this.url}/campaign/${id}`);
+  }
+
   deleteCampaign(id: string) {
     return this.http.delete(`${this.url}/campaign/${id}`);
   }
+
   postData(person: any){
     const headers = { 'content-type': 'application/json'}  
     const body=JSON.stringify(person);

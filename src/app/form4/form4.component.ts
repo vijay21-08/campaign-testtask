@@ -90,10 +90,10 @@ export class Form4Component implements OnInit {
       campaignDetails: this.form1,
       locationDetails: this.form2.VORows,
       radius: this.form2.radius,
-      Audience: this.form3.data,
+      audience: this.form3.data,
       ctr: this.generateCtr(),
       progress: this.generateProgress(),
-      startDate: new Date(),
+      start_date: new Date(),
     }
 
     this.commonService.postData(finalData)

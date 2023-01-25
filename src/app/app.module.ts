@@ -30,6 +30,7 @@ import { HttpClientModule } from '@angular/common/http';
 import {MatDialogModule} from '@angular/material/dialog';
 
 import { ToastrModule } from 'ngx-toastr';
+import { DetailsDialogComponent } from './details-dialog/details-dialog.component';
 
 
 
@@ -41,7 +42,8 @@ import { ToastrModule } from 'ngx-toastr';
     Form1Component,
     Form2Component,
     Form3Component,
-    Form4Component
+    Form4Component,
+    DetailsDialogComponent
   ],
   imports: [
     BrowserModule,

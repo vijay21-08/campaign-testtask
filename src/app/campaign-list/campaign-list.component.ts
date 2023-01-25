@@ -8,6 +8,7 @@ import { CommonService } from '../services/common.service';
 // import { AngularFirestore } from '@angular/fire/firestore'
 import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import { Form4Component} from '../form4/form4.component'
+import { DetailsDialogComponent } from '../details-dialog/details-dialog.component';
 
 export interface UserData {
   id: string;
@@ -63,17 +64,18 @@ export class CampaignListComponent {
     this.dataSource = new MatTableDataSource();
   }
   openDialog(id: any): void {
-    // this.commonService.getData()
-    const dialogRef = this.dialog.open(Form4Component, {
-      data:{
-        data: "dummy data",
-        byPopup: true,
+    this.commonService.getDataById(id).subscribe(
+      (res) => {
+        console.log("data by id", res)
+        const dialogRef = this.dialog.open(DetailsDialogComponent, {
+          data:res
+        });
+    
+        dialogRef.afterClosed().subscribe(result => {
+          console.log('The dialog was closed');
+        });
       }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
+    )
   }
 
 
