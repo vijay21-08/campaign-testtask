@@ -1,5 +1,5 @@
 import {Component, Injectable, ViewChild} from '@angular/core';
-import {FormBuilder, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MatStepper, MatStepperIntl} from '@angular/material/stepper';
 
 @Injectable()
@@ -19,6 +19,10 @@ export class CampaignFormComponent {
   
   optionalLabelText!: string;
   optionalLabelTextChoices: string[] = ['Option 1', 'Option 2', 'Option 3'];
+  form1!: FormGroup;
+  form2!: FormGroup;
+  form3!: FormGroup;
+  showForm4: boolean = false;
   
   secondFormGroup = this._formBuilder.group({
     secondCtrl: ['', Validators.required],
@@ -44,6 +48,7 @@ export class CampaignFormComponent {
   firstFormSubmission(eve: any) {
     console.log("First Form Details", eve);
     if (eve.valid) {
+      this.form1 = eve;
       this.goForward();
     } else {
 
@@ -53,6 +58,7 @@ export class CampaignFormComponent {
   secondFormSubmission(eve: any) {
     console.log("second Form Details", eve);
     if (eve.valid) {
+      this.form2 = eve;
       this.goForward();
     } else {
       
@@ -61,6 +67,8 @@ export class CampaignFormComponent {
   thirdFormSubmission(eve: any) {
     console.log("Third Form Details", eve);
     if (eve.valid) {
+      this.form3 = eve;
+      this.showForm4 = true;
       this.goForward();
     } else {
       

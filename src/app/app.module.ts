@@ -23,7 +23,9 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { Form3Component } from './form3/form3.component';
 import { AgmCoreModule } from '@agm/core';
 import {MatIconModule} from '@angular/material/icon';
-
+import { Form4Component } from './form4/form4.component';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 @NgModule({
@@ -33,7 +35,8 @@ import {MatIconModule} from '@angular/material/icon';
     CampaignFormComponent,
     Form1Component,
     Form2Component,
-    Form3Component
+    Form3Component,
+    Form4Component
   ],
   imports: [
     BrowserModule,
@@ -56,7 +59,9 @@ import {MatIconModule} from '@angular/material/icon';
       apiKey: 'AIzaSyA_S6OnrLoBlHFUm-TKNdJugb-sfS1dJl0',
       libraries: ['places']
     }),
-    MatIconModule
+    MatIconModule,
+    MatMenuModule,
+    MatCheckboxModule 
   ],
   providers: [],
   bootstrap: [AppComponent]

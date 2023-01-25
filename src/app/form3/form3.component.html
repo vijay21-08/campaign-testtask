@@ -1,39 +1,57 @@
-<mat-card>
-    <mat-card-content>
-      <form class="example-form" [formGroup]="thirdFormGroup">
-        <mat-form-field class="example-full-width">
-          <mat-label>Favorite food</mat-label>
-          <input matInput placeholder="Ex. Pizza" value="Sushi" formControlName="campaignObj">
+<mat-accordion class="example-headers-align" multi>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Audience
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-card>
+  <mat-card-content>
+    <!-- <form class="example-form" [formGroup]="thirdFormGroup"> -->
+    <form class="example-form" >
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Search"  [formControl]="search_val" [ngModel]="search_input">
+      </mat-form-field>
+      <mat-form-field class="dropdown">
+        <!-- <div  #levelOneTrigger="matMenuTrigger" [matMenuTriggerFor]="levelOne" (click)="levelOneTrigger.openMenu()"> -->
+          <mat-select #mySelect [(ngModel)]="selectedClassification" name="select-control" [disabled]="false"
+          #levelOneTrigger="matMenuTrigger" [matMenuTriggerFor]="levelOne" (click)="levelOneTrigger.openMenu()">
+            <mat-option class="mat-drop-remove" *ngFor="let category of selectionList" [value]="category">{{category}}</mat-option>
+          </mat-select>
+        <!-- </div> -->
         </mat-form-field>
-        
-        <mat-form-field appearance="fill">
-            <mat-label>Favorite food</mat-label>
-            <mat-select formControlName="campaignCat">
-              <mat-option *ngFor="let food of foods" [value]="food.value" >
-                {{food.viewValue}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-          
-          <mat-form-field appearance="fill">
-            <mat-label>Favorite food</mat-label>
-            <mat-select formControlName="orderType">
-              <mat-option *ngFor="let food of foods" [value]="food.value">
-                {{food.viewValue}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        
-          <mat-form-field class="example-full-width">
-          <mat-label>Leave a comment</mat-label>
-          <textarea matInput placeholder="Ex. It makes me feel..." formControlName="additionalComments"></textarea>
-        </mat-form-field>
+      <mat-menu #levelOne="matMenu" direction="down" yPosition="below">
+        <ng-container *ngFor="let menuItem of modulesList">   
+        <span (mouseleave)="levelOneTrigger.closeMenu()"></span>
+        <ng-container>
+            <li mat-menu-item [matMenuTriggerFor]="levelTwo">
+              <span>{{menuItem.label}}</span>
+              </li>
+              <mat-menu #levelTwo="matMenu">
+                  <ng-container *ngFor="let child2 of menuItem.children">
+                    <button mat-menu-item [matMenuTriggerFor]="levelThree">
+                    {{child2.label}}
+                    </button>
+                    <mat-menu #levelThree="matMenu">
+                  <ng-container *ngFor="let child3 of child2.children">
+                    <button mat-menu-item [value]="child3.label" (click)="onDropdownItemSelected($event)" [ngClass]="{'selectedMenu': child3.label === selectedClassification}">
+                      <mat-checkbox class="mat-menu-item">{{child3.label}}</mat-checkbox>  
+                    </button>
+                  </ng-container>
+              </mat-menu>
+                  </ng-container>
+              </mat-menu>
+      </ng-container>
+    </ng-container>
+    </mat-menu>
     
-        <div>
-            <button mat-button (click)="back()">Back</button>
-            <button mat-button (click)="sendForm()">Next</button>
-          </div>
-      </form>
-    </mat-card-content>
-  </mat-card>
-  
+    <div class="flex-ui example-full-width">
+      <button mat-button (click)="back()" class="dull-btn">Back</button>
+        <button mat-button (click)="sendForm()" class="primary-btn">Next</button>
+    </div>
+
+    </form>
+  </mat-card-content>
+</mat-card>
+</mat-expansion-panel>
+</mat-accordion>

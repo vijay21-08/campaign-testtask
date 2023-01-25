@@ -2,6 +2,7 @@
       <!-- <mat-step [stepControl]="firstFormGroup"> -->
       <mat-step label="Campaign Detail">
         <app-form1 (firstFormEmitter)="firstFormSubmission($event)"></app-form1>
+        <!-- <app-form3 (backEmitter)="goBack()"(thirdFormEmitter)="thirdFormSubmission($event)"></app-form3> -->
     </mat-step>
     <mat-step label="Loctaion Detail">
       <app-form2 (backEmitter)="goBack()"(secondFormEmitter)="secondFormSubmission($event)"></app-form2>
@@ -9,9 +10,13 @@
     <mat-step label="Audience">
       <app-form3 (backEmitter)="goBack()"(thirdFormEmitter)="thirdFormSubmission($event)"></app-form3>
     </mat-step>
-      <mat-step>
-        <ng-template matStepLabel>Campaign Schedule</ng-template>
-        <p>You are now done.</p>
+      <mat-step label="Campaign Schedule">
+        <app-form4 *ngIf="showForm4"
+        [form1]="form1"
+        [form2]="form2"
+        [form3]="form3"
+        >
+      </app-form4>
         <div>
           <button mat-button matStepperPrevious>Back</button>
           <button mat-button (click)="stepper.reset()">Reset</button>
